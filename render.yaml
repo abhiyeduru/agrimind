@@ -2,26 +2,26 @@ services:
   # Backend Service
   - type: web
     name: agrimind-backend
-    env: python
+    runtime: python
     region: oregon
     rootDir: backend
-    buildCommand: "pip install -r requirements.txt"
+    buildCommand: "pip install --upgrade pip && pip install -r requirements.txt"
     startCommand: "uvicorn app:app --host 0.0.0.0 --port $PORT"
     envVars:
       - key: PYTHON_VERSION
-        value: 3.9.18
+        value: 3.9.19
     
   # Frontend Service
   - type: web
     name: agrimind-frontend
-    env: python
+    runtime: python
     region: oregon
     rootDir: frontend
-    buildCommand: "pip install -r requirements.txt"
+    buildCommand: "pip install --upgrade pip && pip install -r requirements.txt"
     startCommand: "streamlit run Home.py --server.port=$PORT --server.address=0.0.0.0 --server.headless=true"
     envVars:
       - key: PYTHON_VERSION
-        value: 3.9.18
+        value: 3.9.19
       - key: BACKEND_URL
         fromService:
           type: web

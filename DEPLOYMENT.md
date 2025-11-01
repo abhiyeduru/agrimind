@@ -16,25 +16,34 @@
 3. Connect your GitHub repository: `abhiyeduru/agrimind`
 4. Configure:
    - **Name**: `agrimind-backend`
-   - **Root Directory**: `backend`
+   - **Root Directory**: `backend` ⚠️ **IMPORTANT**
    - **Environment**: `Python 3`
+   - **Region**: `Oregon (US West)`
+   - **Branch**: `main`
    - **Build Command**: `pip install -r requirements.txt`
    - **Start Command**: `uvicorn app:app --host 0.0.0.0 --port $PORT`
-5. Click "Create Web Service"
-6. **Important**: Copy the backend URL (e.g., `https://agrimind-backend.onrender.com`)
+   - **Instance Type**: `Free`
+5. Add Environment Variable (Advanced):
+   - **Key**: `PYTHON_VERSION`
+   - **Value**: `3.9.18`
+6. Click "Create Web Service"
+7. **Important**: Copy the backend URL (e.g., `https://agrimind-backend.onrender.com`)
 
 **Deploy Frontend:**
 1. Click "New +" → "Web Service" again
 2. Select same repository
 3. Configure:
    - **Name**: `agrimind-frontend`
-   - **Root Directory**: `frontend`
+   - **Root Directory**: `frontend` ⚠️ **IMPORTANT**
    - **Environment**: `Python 3`
+   - **Region**: `Oregon (US West)`
+   - **Branch**: `main`
    - **Build Command**: `pip install -r requirements.txt`
    - **Start Command**: `streamlit run Home.py --server.port=$PORT --server.address=0.0.0.0 --server.headless=true`
-4. Add Environment Variable:
-   - **Key**: `BACKEND_URL`
-   - **Value**: Your backend URL from step 1
+   - **Instance Type**: `Free`
+4. Add Environment Variables (Advanced):
+   - **Key**: `PYTHON_VERSION`, **Value**: `3.9.18`
+   - **Key**: `BACKEND_URL`, **Value**: Your backend URL from step 1
 5. Click "Create Web Service"
 
 **⚠️ Important Note:**

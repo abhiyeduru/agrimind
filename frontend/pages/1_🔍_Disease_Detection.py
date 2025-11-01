@@ -2,6 +2,12 @@ import streamlit as st
 import requests
 from PIL import Image
 import io
+import sys
+import os
+
+# Add parent directory to path to import config
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from config import API_ENDPOINTS
 
 st.set_page_config(page_title="Disease Detection - AgriMind.AI", page_icon="🔍")
 
@@ -26,7 +32,7 @@ if uploaded_file is not None:
                 # Prepare the file for upload
                 files = {"file": ("image.jpg", uploaded_file.getvalue(), "image/jpeg")}
                 response = requests.post(
-                    "http://localhost:8000/detect_disease",
+                    API_ENDPOINTS["detect_disease"],
                     files=files,
                     data={"user_id": "demo_user", "language": language}
                 )
@@ -104,7 +110,7 @@ if uploaded_file is not None:
                     
             except requests.exceptions.ConnectionError:
                 st.error("❌ Cannot connect to the server!")
-                st.info("Please make sure the backend server is running at http://localhost:8000")
+                st.info(f"Please make sure the backend server is running. Backend URL: {API_ENDPOINTS['detect_disease']}")
             except Exception as e:
                 st.error(f"Error: {str(e)}")
                 st.info("Please try uploading a different image or restart the application.")

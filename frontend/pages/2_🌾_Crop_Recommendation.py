@@ -1,5 +1,11 @@
 import streamlit as st
 import requests
+import sys
+import os
+
+# Add parent directory to path to import config
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from config import API_ENDPOINTS
 
 st.set_page_config(page_title="Crop Recommendation - AgriMind.AI", page_icon="🌾")
 
@@ -49,7 +55,7 @@ if st.button("Get Recommendation"):
             st.write("Sending request with data:", request_data)
             
             response = requests.post(
-                "http://localhost:8000/recommend_crop",
+                API_ENDPOINTS["recommend_crop"],
                 json=request_data
             )
             
@@ -93,4 +99,4 @@ if st.button("Get Recommendation"):
                 
         except Exception as e:
             st.error(f"Error: {str(e)}")
-            st.info("Make sure the backend server is running at http://localhost:8000")
+            st.info(f"Make sure the backend server is running. Current backend URL: {API_ENDPOINTS['recommend_crop']}")

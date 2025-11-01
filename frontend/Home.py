@@ -74,7 +74,7 @@ with col1:
     """, unsafe_allow_html=True)
 
 with col2:
-    st.image("assets/farming.svg", caption="Smart Farming with AI", use_container_width=True)
+    st.image("assets/farming.svg", caption="Smart Farming with AI", width="stretch")
     
     # Language selector
     st.sidebar.title("🌐 Language / భాష / भाषा")

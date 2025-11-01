@@ -1,5 +1,11 @@
 import streamlit as st
 import requests
+import sys
+import os
+
+# Add parent directory to path to import config
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from config import API_ENDPOINTS
 
 st.set_page_config(page_title="Chat - AgriMind.AI", page_icon="💬")
 
@@ -37,7 +43,7 @@ if prompt := st.chat_input("Ask your farming question..."):
         with st.spinner("Thinking..."):
             try:
                 response = requests.post(
-                    "http://localhost:8000/chat",
+                    API_ENDPOINTS["chat"],
                     json={
                         "message": prompt,
                         "user_id": "demo_user",
@@ -56,12 +62,12 @@ if prompt := st.chat_input("Ask your farming question..."):
                     
             except Exception as e:
                 st.error(f"Error: {str(e)}")
-                st.info("Make sure the backend server is running at http://localhost:8000")
+                st.info(f"Make sure the backend server is running. Backend URL: {API_ENDPOINTS['chat']}")
 
 # Clear chat button
 if st.button("Clear Chat"):
     st.session_state.messages = []
-    st.experimental_rerun()
+    st.rerun()
 
 # Help section
 with st.expander("💡 Tips for better answers"):
